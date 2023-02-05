@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+// import Products from "./components/home/Products";
+import { useDispatch } from "react-redux";
+import productApi from "./api/productApi";
+import { DefaultLayout } from "./layouts";
+import Cart from "./pages/Cart";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import DetailProduct from "./pages/DetailProduct";
+import { getProducts, getProductStart } from "./store/slices/product";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchDataProducts = async () => {
+      dispatch(getProductStart());
+      const res = await productApi.getProducts();
+      dispatch(getProducts(res.data));
+    };
+    fetchDataProducts();
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<DefaultLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/detail/:id" element={<DetailProduct />} />
+        </Route>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+      </Routes>
+    </>
   );
 }
 
