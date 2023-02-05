@@ -144,6 +144,7 @@ const SignUp = () => {
               <FormGroup>
                 <Label htmlFor={"psw-sign-in"}>Password</Label>
                 <Input
+                  type="password"
                   payload={payload}
                   setError={setError}
                   error={error.password}
@@ -155,6 +156,7 @@ const SignUp = () => {
               <FormGroup className={"mb-4"}>
                 <Label htmlFor={"re-psw-sign-up"}>Re-enter password</Label>
                 <Input
+                  type="password"
                   payload={payload}
                   setError={setError}
                   error={error.cPassword}

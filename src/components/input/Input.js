@@ -7,6 +7,7 @@ const Input = ({
   setPayload = () => {},
   error = "",
   setError,
+  type = "text",
 }) => {
   return (
     <>
@@ -17,7 +18,7 @@ const Input = ({
         name={name}
         id={id}
         value={payload[name]}
-        type="text"
+        type={type}
         onFocus={() => setError((prev) => ({ ...prev, [name]: "" }))}
         className="p-1 rounded-md border  focus-within:border-[#e77600]  border-gray-400 outline-none focus-within:shadow-amazonInput duration-100"
       />

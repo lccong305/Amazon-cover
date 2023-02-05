@@ -92,6 +92,7 @@ const SignIn = () => {
             <FormGroup>
               <Label htmlFor={"psw-sign-in"}>Password</Label>
               <Input
+                type={"password"}
                 setPayload={setPayload}
                 setError={setError}
                 error={error.password}
