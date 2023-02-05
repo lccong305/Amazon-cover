@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "../components/button/Button";
 import {
   FormGroup,
@@ -88,11 +89,11 @@ const SignUp = () => {
           dispatch(
             setUser({
               _id: user.uid,
-              // token: user.stsTokenManager,
               clientName: user.displayName,
               avatar: user.photoURL,
             })
           );
+          toast.success("Register success");
           handleReset();
           navigate("/");
 

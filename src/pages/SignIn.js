@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "../components/button/Button";
 import FormGroup from "../components/commom/FormGroup";
 import Heading from "../components/commom/Heading";
@@ -54,6 +55,7 @@ const SignIn = () => {
               avatar: user.photoURL,
             })
           );
+          toast.success("Login success");
           navigate("/");
 
           // ...

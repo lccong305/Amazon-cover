@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 
 const FooterTop = () => {
   return (
-    <div className="w-full bg-white py-6">
+    <div className="w-full py-6 bg-white">
       <div className="w-full border-t-[1px] border-b-[1px] py-8">
-        <div className="w-64 mx-auto text-center flex flex-col gap-1">
+        <div className="flex flex-col w-64 gap-1 mx-auto text-center">
           <p className="text-sm">See Personalised recommendations</p>
           <Link
             to="/sign-in"
-            className="blok w-full bg-yellow-400 rounded-md py-1 font-semibold cursor-pointer hover:bg-yellow-500 active:bg-yellow-700"
+            className="w-full py-1 font-semibold bg-yellow-400 rounded-md cursor-pointer blok hover:bg-yellow-500 active:bg-yellow-700"
           >
             Sign In
           </Link>
-          <p className="text-xs mt-1">
+          <p className="mt-1 text-xs">
             New Customer?{" "}
-            <span className="text-blue-600 ml-1 cursor-pointer">
+            <Link to="/sign-up" className="ml-1 text-blue-600 cursor-pointer">
               Start here.
-            </span>
+            </Link>
           </p>
         </div>
       </div>

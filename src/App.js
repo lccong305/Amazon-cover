@@ -10,6 +10,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import DetailProduct from "./pages/DetailProduct";
 import { getProducts, getProductStart } from "./store/slices/product";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,6 +33,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
+      <ToastContainer />
     </>
   );
 }

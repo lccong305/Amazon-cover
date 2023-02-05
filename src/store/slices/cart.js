@@ -96,5 +96,11 @@ const slice = createSlice({
 });
 
 const { reducer, actions } = slice;
-export const { addToCart, incrementItem, decrementItem, deleteItem } = actions;
+export const {
+  addToCart,
+  incrementItem,
+  decrementItem,
+  deleteItem,
+  clearCart,
+} = actions;
 export default reducer;

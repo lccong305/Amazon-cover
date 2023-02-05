@@ -64,7 +64,7 @@ const DetailProduct = () => {
               <Skeleton variant="rectangular" width={669} height={70} />
               <Skeleton variant="rectangular" width={669} height={400} />
             </div>
-            <Skeleton variant="rectangular" width={300} height={300} />
+            <Skeleton variant="rectangular" width={400} height={300} />
           </div>
           <div className="flex gap-2 md:hidden">
             <Skeleton variant="rectangular" width={350} height={400} />

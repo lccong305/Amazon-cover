@@ -13,7 +13,7 @@ const SignIn = () => {
         <p className="text-sm font-light whitespace-nowrap text-lightText">
           Hello, {isLoggedIn ? userInfo?.clientName : <span>sign in</span>}
         </p>
-        <p className="hidden -mt-1 text-lg font-semibold mdl:inline-flex text-whiteText">
+        <p className="hidden -mt-1 text-base font-semibold mdl:inline-flex text-whiteText">
           Accounts & Lists{" "}
           <span>
             <ArrowDropDownOutlinedIcon />

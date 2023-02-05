@@ -6,7 +6,7 @@ const Logo = () => {
     <>
       <Link to="/">
         <div className="headerHover">
-          <img className="mt-2 w-28" src={logo} alt="logo" />
+          <img className="w-24 mt-2" src={logo} alt="logo" />
         </div>
       </Link>
     </>

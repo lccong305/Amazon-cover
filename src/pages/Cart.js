@@ -1,18 +1,36 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Button from "../components/button/Button";
 import CartItem from "../components/card/CartItem";
+import { clearCart } from "../store/slices/cart";
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { items, totalItem } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   // useEffect(() => {
   //   if (items.length > 0) {
   //   }
   // }, [items]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const subTotal = items?.reduce((prevVal, currentVal) => {
     return (prevVal += currentVal.price * currentVal.quantity);
   }, 0);
+
+  const handleCheckOut = () => {
+    if (!isLoggedIn) {
+      toast.warning("Sign in to checkout");
+      navigate("/sign-in");
+    } else {
+      dispatch(clearCart());
+    }
+  };
 
   return (
     <>
@@ -39,7 +57,7 @@ const Cart = () => {
                 </div>
               ))}
           </div>
-          <div className="w-full col-span-1 p-4 bg-white rounded lg:h-48 ">
+          <div className="w-full col-span-1 p-4 bg-white rounded lg:h-56 ">
             <div className="flex gap-x-3 ">
               <span className="text-green-500">
                 {" "}
@@ -56,6 +74,12 @@ const Cart = () => {
                 ${subTotal.toFixed(2)}{" "}
               </span>
             </div>
+            <Button
+              onClick={handleCheckOut}
+              className="w-full py-2 text-xs border-none rounded-full"
+            >
+              Proceed to checkout
+            </Button>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const LogOut = ({ onClick }) => {
         <p className="text-xs font-light text-white mdl:text-sm mdl:text-lightText">
           <LogoutIcon fontSize="18" />
         </p>
-        <p className="-mt-1 text-lg font-semibold text-whiteText whitespace-nowrap">
+        <p className="-mt-1 text-base font-semibold text-whiteText whitespace-nowrap">
           Logout
         </p>
       </div>
