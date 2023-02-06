@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Rating from "react-rating";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import productApi from "../api/productApi";
 import Button from "../components/button/Button";
 import { addToCart } from "../store/slices/cart";
@@ -34,9 +35,9 @@ const DetailProduct = () => {
   const handleRate = (rate) => {
     console.log(rate);
     if (isLoggedIn) {
-      alert("you rated");
+      alert("You rated");
     } else {
-      alert("Dang nhap da thang ngu");
+      alert("Sign in to rate");
     }
   };
   const handleAddToCart = () => {
@@ -48,9 +49,10 @@ const DetailProduct = () => {
         price: product.price,
         category: product.category,
         image: product.image,
-        quantity: qty,
+        quantity: Number(qty),
       })
     );
+    toast.success("Add to cart success");
   };
 
   return (
