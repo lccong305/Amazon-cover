@@ -1,12 +1,12 @@
 import React from "react";
 
 const Input = ({
-  id,
+  id = "",
   name = "",
   payload = {},
   setPayload = () => {},
   error = "",
-  setError,
+  setError = () => {},
   type = "text",
 }) => {
   return (

@@ -5,6 +5,7 @@ const cartItem = JSON.parse(localStorage.getItem("persist:cartItems"))?.items;
 const initialState = {
   items: cartItem?.length > 0 || cartItem !== undefined ? cartItem : [],
   totalItem: 0,
+  subTotal: 0,
 };
 
 const slice = createSlice({
@@ -88,7 +89,14 @@ const slice = createSlice({
       state.totalItem = state.items.length;
     },
 
-    clearCart(state) {
+    sumTotal(state, action) {
+      let newSubTotal = state.items.reduce((prevValue, currentValue) => {
+        return (prevValue += currentValue.price * currentValue.quantity);
+      }, 0);
+      state.subTotal = newSubTotal;
+    },
+
+    clearCart(state, action) {
       state.items = [];
       state.totalItem = 0;
     },
@@ -102,5 +110,6 @@ export const {
   decrementItem,
   deleteItem,
   clearCart,
+  sumTotal,
 } = actions;
 export default reducer;

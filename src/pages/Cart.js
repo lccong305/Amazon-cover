@@ -2,33 +2,32 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "../components/button/Button";
 import CartItem from "../components/card/CartItem";
-import { clearCart } from "../store/slices/cart";
+import { sumTotal } from "../store/slices/cart";
 
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items, totalItem } = useSelector((state) => state.cart);
+  const { items, totalItem, subTotal } = useSelector((state) => state.cart);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   if (items.length > 0) {
-  //   }
-  // }, [items]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-  const subTotal = items?.reduce((prevVal, currentVal) => {
-    return (prevVal += currentVal.price * currentVal.quantity);
-  }, 0);
+    dispatch(sumTotal());
+  }, [dispatch]);
+  // const subTotal = items?.reduce((prevVal, currentVal) => {
+  //   return (prevVal += currentVal.price * currentVal.quantity);
+  // }, 0);
+
+  console.log(subTotal);
 
   const handleCheckOut = () => {
+    // dispatch(clearCart());
     if (!isLoggedIn) {
-      toast.warning("Sign in to checkout");
       navigate("/sign-in");
     } else {
-      dispatch(clearCart());
+      navigate("/check-out");
     }
   };
 
@@ -70,9 +69,7 @@ const Cart = () => {
             </div>
             <div className="flex items-center justify-between px-4 mb-3">
               <span className="text-xl font-bold"> Total</span>
-              <span className="text-2xl font-bold">
-                ${subTotal.toFixed(2)}{" "}
-              </span>
+              <span className="text-2xl font-bold">${subTotal.toFixed(2)}</span>
             </div>
             <Button
               onClick={handleCheckOut}

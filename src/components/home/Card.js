@@ -7,22 +7,41 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import React from "react";
 import Rating from "react-rating";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../store/slices/cart";
 const Card = ({ item = {} }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
-  const handleRate = () => {
+  const handleRate = (e) => {
     if (isLoggedIn) {
       alert("Rating success");
     } else {
       alert("Sign in to rate");
     }
+
+    if (e.stopPropagation) e.stopPropagation();
+  };
+
+  const handleAddToCart = (e) => {
+    dispatch(
+      addToCart({
+        id: item.id,
+        title: item.title,
+        desc: item.description,
+        price: item.price,
+        category: item.category,
+        image: item.image,
+        quantity: 1,
+      })
+    );
+
+    e.stopPropagation();
   };
 
   return (
-    <Link to={`/detail/${item.id}`}>
+    <div onClick={() => navigate(`/detail/${item.id}`)}>
       <div className="product-card bg-white  h-auto border-[1px] border-gray-200 py-8 z-30 hover:border-transparent shadow-none hover:shadow-testShadow duration-100 relative flex flex-col gap-4">
         <span className="absolute text-xs italic text-gray-500 capitalize right-2 top-2">
           {item.category}
@@ -69,7 +88,10 @@ const Card = ({ item = {} }) => {
           </div>
           <div>
             <p>{item.description.substring(0, 100)}...</p>
-            <div className="mb-2 text-yellow-500">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="mb-2 text-yellow-500 "
+            >
               <Rating
                 initialRating={Number(Math.floor(item?.rating?.rate))}
                 emptySymbol={
@@ -87,26 +109,14 @@ const Card = ({ item = {} }) => {
             </div>
             <button
               className="w-full py-2 font-bold bg-yellow-300 rounded-lg font-titleFont "
-              onClick={() =>
-                dispatch(
-                  addToCart({
-                    id: item.id,
-                    title: item.title,
-                    desc: item.description,
-                    price: item.price,
-                    category: item.category,
-                    image: item.image,
-                    quantity: 1,
-                  })
-                )
-              }
+              onClick={handleAddToCart}
             >
               Add to cart
             </button>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 const Location = () => {
   return (
     <>
-      <div className="hidden lg:items-center lg:flex lg:headerHover">
+      <div className="hidden cursor-pointer lg:items-center lg:flex headerHover">
         <LocationOnOutlinedIcon />
         <p className="flex flex-col text-xs font-light text-lightText">
           Deliver to{" "}
